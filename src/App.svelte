@@ -114,4 +114,20 @@
     letter-spacing: 0.05em;
     animation: blink 0.5s step-end infinite;
   }
+
+  @media (min-width: 480px) {
+    .skip-gate__prompt,
+    .skip-gate__btn,
+    .skip-gate__flash {
+      font-size: 0.625rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .skip-gate__prompt,
+    .skip-gate__btn,
+    .skip-gate__flash {
+      font-size: 0.75rem;
+    }
+  }
 </style>
