@@ -25,10 +25,11 @@ test.describe('Memory Match', () => {
 
   test('clicking two non-matching cards flips them back', async ({ page }) => {
     const cards = page.locator('.memory__card');
+    // Click cards until we find a non-matching pair
     await cards.nth(0).click();
-    await cards.nth(1).click();
-    // After mismatch delay (700ms), both should flip back
-    await page.waitForTimeout(900);
+    await cards.nth(2).click();
+    // After mismatch delay (700ms) + buffer, both should flip back
+    await page.waitForTimeout(1100);
     await expect(page.locator('.memory__card--flipped')).toHaveCount(0);
   });
 
@@ -93,12 +94,12 @@ test.describe('Whack-a-Bug', () => {
   test('clicking START hides the start button and shows the grid', async ({ page }) => {
     await page.locator('#game-whack button:has-text("START")').click();
     await expect(page.locator('#game-whack button:has-text("START")')).not.toBeVisible();
-    await expect(page.locator('.moles')).toBeVisible();
+    await expect(page.locator('.mole__grid')).toBeVisible();
   });
 
   test('shows 9 mole holes after start', async ({ page }) => {
     await page.locator('#game-whack button:has-text("START")').click();
-    await expect(page.locator('.mole__hole')).toHaveCount(9);
+    await expect(page.locator('.mole__grid .mole__hole')).toHaveCount(9);
   });
 
   test('score increases when active mole is whacked', async ({ page }) => {

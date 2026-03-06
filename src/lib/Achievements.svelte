@@ -41,8 +41,8 @@
       <h2 class="section__title">OPEN SOURCE</h2>
     </div>
 
-    <h3 class="subsection-title">MAINTAINED PROJECTS</h3>
-    <div class="projects" use:fadeIn>
+    <h3 class="section__subtitle--sub">MAINTAINED PROJECTS</h3>
+    <div class="project__list" use:fadeIn>
       {#each projects as proj}
         <a class="project" href={proj.href} target="_blank" rel="noopener">
           <i class="{proj.icon} project__icon"></i>
@@ -54,8 +54,8 @@
       {/each}
     </div>
 
-    <h3 class="subsection-title">UNLOCKED</h3>
-    <div class="badges" use:fadeIn>
+    <h3 class="section__subtitle--sub">UNLOCKED</h3>
+    <div class="badge__list" use:fadeIn>
       {#each badges as badge}
         <div class="badge">
           <i class="{badge.icon} badge__icon"></i>
@@ -67,7 +67,7 @@
 </section>
 
 <style>
-  .projects {
+  .project__list {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
@@ -116,7 +116,7 @@
     color: var(--text-muted);
   }
 
-  .badges {
+  .badge__list {
     display: grid;
     grid-template-columns: 1fr;
     gap: 0.75rem;
@@ -150,23 +150,23 @@
   }
 
   @media (min-width: 480px) {
-    .projects {
+    .project__list {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    .badges {
+    .badge__list {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
   @media (min-width: 768px) {
-    .projects {
+    .project__list {
       grid-template-columns: repeat(3, 1fr);
     }
   }
 
   @media (min-width: 1024px) {
-    .badges {
+    .badge__list {
       grid-template-columns: repeat(4, 1fr);
     }
 

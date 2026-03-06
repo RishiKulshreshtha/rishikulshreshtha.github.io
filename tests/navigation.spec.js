@@ -49,6 +49,56 @@ test.describe('Footer', () => {
   });
 });
 
+test.describe('Hero — locked buttons', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('EXPLORE and SAY HELLO buttons are present in hero', async ({ page }) => {
+    await expect(page.locator('.hero__actions button:has-text("EXPLORE")')).toBeVisible();
+    await expect(page.locator('.hero__actions button:has-text("SAY HELLO")')).toBeVisible();
+  });
+
+  test('clicking EXPLORE when locked shows a locked message', async ({ page }) => {
+    await page.locator('.hero__actions button:has-text("EXPLORE")').click();
+    await expect(page.locator('.hero__locked-msg')).toBeVisible();
+    await expect(page.locator('.hero__locked-msg')).toContainText('MEMORY MATCH');
+  });
+
+  test('clicking SAY HELLO when locked shows a locked message', async ({ page }) => {
+    await page.locator('.hero__actions button:has-text("SAY HELLO")').click();
+    await expect(page.locator('.hero__locked-msg')).toBeVisible();
+    await expect(page.locator('.hero__locked-msg')).toContainText('skip_games.sh');
+  });
+
+  test('clicking EXPLORE when locked scrolls to Memory Match game', async ({ page }) => {
+    await page.locator('.hero__actions button:has-text("EXPLORE")').click();
+    await expect(page.locator('#game-memory')).toBeInViewport({ timeout: 2000 });
+  });
+
+  test('locked message disappears after 3 seconds', async ({ page }) => {
+    await page.locator('.hero__actions button:has-text("EXPLORE")').click();
+    await expect(page.locator('.hero__locked-msg')).toBeVisible();
+    await page.waitForTimeout(3200);
+    await expect(page.locator('.hero__locked-msg')).not.toBeVisible();
+  });
+
+  test('EXPLORE works normally after skip', async ({ page }) => {
+    await page.locator('.skip-gate__btn').click();
+    await page.waitForTimeout(1000);
+    await page.locator('.hero__actions button:has-text("EXPLORE")').click();
+    await expect(page.locator('#about')).toBeInViewport({ timeout: 2000 });
+  });
+});
+
+test.describe('Cursor', () => {
+  test('cursor dot and ring elements are in the DOM', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('.cursor__dot')).toBeAttached();
+    await expect(page.locator('.cursor__ring')).toBeAttached();
+  });
+});
+
 test.describe('Navigation — skip gate', () => {
   test('skip button is visible below the Memory Match game', async ({ page }) => {
     await page.goto('/');

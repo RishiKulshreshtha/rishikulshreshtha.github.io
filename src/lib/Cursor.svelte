@@ -47,21 +47,21 @@
 
 <div
   bind:this={dotEl}
-  class="cursor-dot"
-  class:cursor-dot--hover={hovered}
-  class:cursor-dot--click={clicked}
+  class="cursor__dot"
+  class:cursor__dot--hover={hovered}
+  class:cursor__dot--click={clicked}
   aria-hidden="true"
 ></div>
 <div
   bind:this={ringEl}
-  class="cursor-ring"
-  class:cursor-ring--hover={hovered}
+  class="cursor__ring"
+  class:cursor__ring--hover={hovered}
   aria-hidden="true"
 ></div>
 
 <style>
-  .cursor-dot,
-  .cursor-ring {
+  .cursor__dot,
+  .cursor__ring {
     position: fixed;
     top: 0;
     left: 0;
@@ -71,7 +71,7 @@
   }
 
   /* Pixel dot — follows mouse exactly */
-  .cursor-dot {
+  .cursor__dot {
     width: 6px;
     height: 6px;
     background: var(--accent-gold);
@@ -80,7 +80,7 @@
     transition: background 0.15s, width 0.15s, height 0.15s, margin 0.15s;
   }
 
-  .cursor-dot--hover {
+  .cursor__dot--hover {
     background: var(--accent-orange);
     width: 8px;
     height: 8px;
@@ -88,7 +88,7 @@
     margin-top: -4px;
   }
 
-  .cursor-dot--click {
+  .cursor__dot--click {
     background: var(--accent-green);
     width: 12px;
     height: 12px;
@@ -97,7 +97,7 @@
   }
 
   /* Outlined ring — lags behind */
-  .cursor-ring {
+  .cursor__ring {
     width: 22px;
     height: 22px;
     border: 2px solid var(--accent-blue);
@@ -107,7 +107,7 @@
     transition: border-color 0.2s, width 0.2s, height 0.2s, margin 0.2s, opacity 0.2s;
   }
 
-  .cursor-ring--hover {
+  .cursor__ring--hover {
     width: 32px;
     height: 32px;
     margin-left: -16px;

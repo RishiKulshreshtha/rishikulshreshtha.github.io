@@ -59,7 +59,7 @@
   }
 </script>
 
-<section class="section game-section" id="game-memory" aria-label="Memory Match game — win to unlock the next section">
+<section class="section section--game" id="game-memory" aria-label="Memory Match game — win to unlock the next section">
   <div class="container">
     <div class="game">
       <div class="game__header">

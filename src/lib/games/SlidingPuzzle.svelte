@@ -36,7 +36,7 @@
   }
 </script>
 
-<section class="section game-section" id="game-sliding" aria-label="Sliding Puzzle game — win to unlock the next section">
+<section class="section section--game" id="game-sliding" aria-label="Sliding Puzzle game — win to unlock the next section">
   <div class="container">
     <div class="game">
       <div class="game__header">

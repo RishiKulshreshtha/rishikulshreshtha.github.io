@@ -188,7 +188,7 @@ img {
   line-height: 1.7;
 }
 
-.subsection-title {
+.section__subtitle--sub {
   font-family: var(--font-pixel);
   font-size: 0.625rem;
   color: var(--accent-gold);
@@ -343,7 +343,7 @@ img {
     font-size: 1.25rem;
   }
 
-  .subsection-title {
+  .section__subtitle--sub {
     font-size: 0.6875rem;
   }
 
@@ -372,7 +372,7 @@ img {
     max-width: 600px;
   }
 
-  .subsection-title {
+  .section__subtitle--sub {
     font-size: 0.75rem;
   }
 

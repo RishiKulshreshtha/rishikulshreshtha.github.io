@@ -76,7 +76,7 @@
   });
 </script>
 
-<section class="section game-section" id="game-whack" aria-label="Whack-a-Bug game — win to unlock the final sections">
+<section class="section section--game" id="game-whack" aria-label="Whack-a-Bug game — win to unlock the final sections">
   <div class="container">
     <div class="game">
       <div class="game__header">
@@ -103,7 +103,7 @@
         </div>
 
         {#if !lost}
-          <div class="moles">
+          <div class="mole__grid">
             {#each Array(9) as _, i}
               <button
                 class="mole__hole"
@@ -208,7 +208,7 @@
     letter-spacing: 0.05em;
   }
 
-  .moles {
+  .mole__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.75rem;
