@@ -1,0 +1,47 @@
+# Rishi Kulshreshtha
+
+> AI enthusiast and senior Drupal developer with 14+ years building enterprise web solutions. Open-source contributor and LLM integration pioneer.
+
+## About
+
+Rishi Kulshreshtha is a senior Drupal developer at Redfin Solutions, LLC, based in Maine. He specializes in bridging open-source CMS platforms with modern AI/LLM technologies, and has contributed to the Drupal ecosystem for over a decade.
+
+- 14+ years of Drupal development
+- LLM and AI integration with enterprise CMS
+- Open-source contributor on Drupal.org and GitHub
+- Based in Maine, USA
+
+## Skills
+
+Core: Drupal (6–11), PHP, JavaScript, Svelte, Python
+AI/ML: LLM integration, prompt engineering, AI-assisted development
+DevOps: GitHub Actions, CI/CD, Linux, Docker
+Other: REST/GraphQL APIs, accessibility (WCAG), SEO
+
+## Open Source Achievements
+
+Active contributor to the Drupal project. Modules, patches, and issue queue participation on drupal.org/u/rishikulshreshtha.
+
+## Blog
+
+Blog is coming soon at /blog — covering Drupal deep-dives, AI in the real world, and open-source lessons.
+
+## Contact
+
+- LinkedIn: https://www.linkedin.com/in/rishikulshreshtha/
+- GitHub: https://github.com/RishiKulshreshtha/
+- Drupal.org: https://www.drupal.org/u/rishikulshreshtha
+- X: https://x.com/RishiShreshtha
+
+## Site structure
+
+- / — Home page (portfolio, games, sections unlocked by winning mini-games)
+- /?page=blog — Blog listing
+- /?page=blog&post={slug} — Individual blog post
+- /about.md — About section in markdown
+- /skills.md — Skills section in markdown
+- /blog.md — Blog overview in markdown
+- /posts/{slug}.md — Individual blog post source markdown
+- /llms.txt — This file
+- /sitemap.xml — XML sitemap
+- /robots.txt — Robots exclusion

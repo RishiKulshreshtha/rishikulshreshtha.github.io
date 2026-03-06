@@ -3,13 +3,13 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 import fs from 'fs';
 import path from 'path';
 
-// Plugin: copy src/posts/*.md to dist/posts/ for direct .md URL access
+// Plugin: copy src/posts/*.md to docs/posts/ for direct .md URL access
 function copyPostsPlugin() {
   return {
     name: 'copy-posts',
     closeBundle() {
       const src = path.resolve('src/posts');
-      const dest = path.resolve('dist/posts');
+      const dest = path.resolve('docs/posts');
       if (!fs.existsSync(src)) return;
       fs.mkdirSync(dest, { recursive: true });
       for (const file of fs.readdirSync(src)) {
@@ -24,6 +24,10 @@ function copyPostsPlugin() {
 export default defineConfig({
   plugins: [svelte(), copyPostsPlugin()],
   base: '/',
+  build: {
+    outDir: 'docs',
+    emptyOutDir: true,
+  },
   server: {
     allowedHosts: true,
   },
