@@ -1,4 +1,6 @@
 <script>
+  import { playCoin, playWin } from '../sound.js';
+
   let { onwin = () => {} } = $props();
 
   const GOAL = 12;
@@ -44,6 +46,7 @@
     clearTimeout(moleTimer);
     activeMole = -1;
     score++;
+    playCoin();
     if (score >= GOAL) {
       endGame(true);
     } else {
@@ -58,6 +61,7 @@
     activeMole = -1;
     if (success) {
       won = true;
+      playWin();
       setTimeout(() => onwin(), 1600);
     } else {
       lost = true;

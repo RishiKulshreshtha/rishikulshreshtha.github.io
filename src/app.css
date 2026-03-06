@@ -79,6 +79,11 @@ body {
   transition: background var(--transition), color var(--transition);
 }
 
+/* Hide default cursor on non-touch devices — replaced by Cursor.svelte */
+@media (hover: hover) {
+  *, *::before, *::after { cursor: none !important; }
+}
+
 /* Scanlines — dark mode only */
 [data-theme="dark"] body::after {
   content: '';

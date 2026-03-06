@@ -1,5 +1,6 @@
 <script>
   import { SOLVED, getAdjacent, shuffle } from './slidingLogic.js';
+  import { playTick, playWin } from '../sound.js';
 
   let { onwin = () => {} } = $props();
 
@@ -12,6 +13,7 @@
   $effect(() => {
     if (won && !winTriggered) {
       winTriggered = true;
+      playWin();
       setTimeout(() => onwin(), 1600);
     }
   });
@@ -24,6 +26,7 @@
     [t[emptyPos], t[pos]] = [t[pos], t[emptyPos]];
     tiles = t;
     moves++;
+    playTick();
   }
 
   function reset() {

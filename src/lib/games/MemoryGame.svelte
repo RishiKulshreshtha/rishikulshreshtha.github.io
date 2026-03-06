@@ -1,5 +1,6 @@
 <script>
   import { createDeck } from './memoryLogic.js';
+  import { playTick, playCoin, playWin } from '../sound.js';
 
   let { onwin = () => {} } = $props();
 
@@ -14,6 +15,7 @@
   $effect(() => {
     if (won && !winTriggered) {
       winTriggered = true;
+      playWin();
       setTimeout(() => onwin(), 1600);
     }
   });
@@ -22,6 +24,7 @@
     if (checking || cards[index].flipped || cards[index].matched || flippedIndices.length >= 2) return;
 
     cards[index].flipped = true;
+    playTick();
     const next = [...flippedIndices, index];
     flippedIndices = next;
 
@@ -35,6 +38,7 @@
         cards[b].matched = true;
         flippedIndices = [];
         checking = false;
+        playCoin();
       } else {
         setTimeout(() => {
           cards[a].flipped = false;

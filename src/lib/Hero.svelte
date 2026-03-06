@@ -1,4 +1,6 @@
 <script>
+  import { playError } from './sound.js';
+
   let { game1Won = false, game3Won = false } = $props();
 
   let lockedMsg = $state('');
@@ -14,6 +16,7 @@
   function explore(e) {
     e.preventDefault();
     if (!game1Won) {
+      playError();
       showMsg('// WIN MEMORY MATCH FIRST — OR USE ./skip_games.sh BELOW', 'game-memory');
     } else {
       document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
@@ -23,6 +26,7 @@
   function sayHello(e) {
     e.preventDefault();
     if (!game3Won) {
+      playError();
       showMsg('// CLEAR ALL 3 GAMES TO UNLOCK CONTACT — OR USE ./skip_games.sh BELOW', 'game-memory');
     } else {
       document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });

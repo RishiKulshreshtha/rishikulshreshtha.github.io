@@ -9,6 +9,7 @@
   import Achievements from './lib/Achievements.svelte';
   import Contact from './lib/Contact.svelte';
   import Footer from './lib/Footer.svelte';
+  import Cursor from './lib/Cursor.svelte';
 
   let game1Won = $state(false);
   let game2Won = $state(false);
@@ -31,6 +32,7 @@
   let allWon = $derived(game1Won && game2Won && game3Won);
 </script>
 
+<Cursor />
 <Nav {game1Won} {game2Won} {game3Won} />
 
 <main id="main-content">
