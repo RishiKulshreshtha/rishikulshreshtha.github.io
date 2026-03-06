@@ -34,7 +34,7 @@
 <Nav {game1Won} {game2Won} {game3Won} />
 
 <main id="main-content">
-  <Hero />
+  <Hero {game1Won} {game3Won} />
   <MemoryGame onwin={() => { game1Won = true; scrollTo('about'); }} />
 
   {#if !allWon}

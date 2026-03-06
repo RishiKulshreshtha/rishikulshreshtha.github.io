@@ -1,3 +1,35 @@
+<script>
+  let { game1Won = false, game3Won = false } = $props();
+
+  let lockedMsg = $state('');
+  let msgTimer = null;
+
+  function showMsg(msg, scrollTarget) {
+    lockedMsg = msg;
+    clearTimeout(msgTimer);
+    msgTimer = setTimeout(() => { lockedMsg = ''; }, 3000);
+    document.getElementById(scrollTarget)?.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function explore(e) {
+    e.preventDefault();
+    if (!game1Won) {
+      showMsg('// WIN MEMORY MATCH FIRST — OR USE ./skip_games.sh BELOW', 'game-memory');
+    } else {
+      document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  function sayHello(e) {
+    e.preventDefault();
+    if (!game3Won) {
+      showMsg('// CLEAR ALL 3 GAMES TO UNLOCK CONTACT — OR USE ./skip_games.sh BELOW', 'game-memory');
+    } else {
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+</script>
+
 <section class="hero section" id="hero" aria-label="Introduction">
   <div class="hero__inner container">
     <div class="hero__content">
@@ -9,9 +41,18 @@
         <p class="hero__line">Open Source Advocate</p>
       </div>
       <div class="hero__actions">
-        <a class="btn btn--primary" href="#about">EXPLORE <i class="fas fa-arrow-down"></i></a>
-        <a class="btn btn--outline" href="#contact">SAY HELLO</a>
+        <button class="btn btn--primary" onclick={explore} aria-label={game1Won ? 'Explore portfolio' : 'Explore — locked until Memory Match is won'}>
+          EXPLORE <i class="fas fa-arrow-down" aria-hidden="true"></i>
+        </button>
+        <button class="btn btn--outline" onclick={sayHello} aria-label={game3Won ? 'Say hello' : 'Say hello — locked until all games are won'}>
+          SAY HELLO
+        </button>
       </div>
+      {#if lockedMsg}
+        <p class="hero__locked-msg" aria-live="polite">
+          <span class="hero__locked-caret">&gt;</span> {lockedMsg}
+        </p>
+      {/if}
     </div>
     <div class="hero__image">
       <picture>
@@ -192,6 +233,24 @@
       width: 300px;
       height: 300px;
     }
+  }
+
+  .hero__locked-msg {
+    margin-top: 1rem;
+    font-family: var(--font-pixel);
+    font-size: 0.4rem;
+    color: var(--accent-orange);
+    letter-spacing: 0.05em;
+    line-height: 1.8;
+    animation: fadeInUp 0.2s ease forwards;
+  }
+
+  .hero__locked-caret {
+    color: var(--accent-green);
+  }
+
+  @media (min-width: 768px) {
+    .hero__locked-msg { font-size: 0.45rem; }
   }
 
   @media (min-width: 1280px) {
