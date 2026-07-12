@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Memory Match', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/playground');
   });
 
   test('game section is visible on load', async ({ page }) => {
@@ -36,7 +36,7 @@ test.describe('Memory Match', () => {
   test('restart button resets the board', async ({ page }) => {
     await page.locator('.memory__card').first().click();
     await expect(page.locator('.memory__card--flipped')).toHaveCount(1);
-    await page.locator('button:has-text("RESTART")').click();
+    await page.locator('#game-memory button:has-text("RESTART")').click();
     await expect(page.locator('.memory__card--flipped')).toHaveCount(0);
     await expect(page.locator('.memory__card-back')).toHaveCount(16);
   });
@@ -44,10 +44,8 @@ test.describe('Memory Match', () => {
 
 test.describe('Sliding Puzzle', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
-    // Unlock via skip so the puzzle is visible
-    await page.locator('.skip-gate__btn').click();
-    await expect(page.locator('#game-sliding')).toBeVisible({ timeout: 3000 });
+    await page.goto('/playground');
+    await expect(page.locator('#game-sliding')).toBeVisible();
   });
 
   test('renders 9 tiles (8 numbered + 1 empty)', async ({ page }) => {
@@ -73,18 +71,17 @@ test.describe('Sliding Puzzle', () => {
   });
 
   test('shuffle button reshuffles the board', async ({ page }) => {
-    await page.locator('button:has-text("SHUFFLE")').click();
+    await page.locator('#game-sliding button:has-text("SHUFFLE")').click();
     await expect(page.locator('.puzzle__tile')).toHaveCount(9);
     // Move count resets to 0
-    await expect(page.locator('.game__stat').first()).toContainText('0');
+    await expect(page.locator('#game-sliding .game__stat').first()).toContainText('0');
   });
 });
 
 test.describe('Whack-a-Bug', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
-    await page.locator('.skip-gate__btn').click();
-    await expect(page.locator('#game-whack')).toBeVisible({ timeout: 3000 });
+    await page.goto('/playground');
+    await expect(page.locator('#game-whack')).toBeVisible();
   });
 
   test('shows START button before game begins', async ({ page }) => {
@@ -112,5 +109,23 @@ test.describe('Whack-a-Bug', () => {
   test('shows timer countdown after start', async ({ page }) => {
     await page.locator('#game-whack button:has-text("START")').click();
     await expect(page.locator('#game-whack .game__stat').nth(1)).toContainText('TIME:');
+  });
+});
+
+test.describe('Bug Runner and Asteroid Dodge', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/playground');
+  });
+
+  test('Bug Runner canvas is present with an accessible label', async ({ page }) => {
+    const canvas = page.locator('#game-runner canvas');
+    await expect(canvas).toBeVisible();
+    await expect(canvas).toHaveAttribute('aria-label', /Bug Runner/);
+  });
+
+  test('Asteroid Dodge canvas is present with an accessible label', async ({ page }) => {
+    const canvas = page.locator('#game-space canvas');
+    await expect(canvas).toBeVisible();
+    await expect(canvas).toHaveAttribute('aria-label', /Asteroid Dodge/);
   });
 });

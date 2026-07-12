@@ -88,7 +88,7 @@
   }
 
   .skill-category__title {
-    font-family: var(--font-pixel);
+    font-family: var(--font-heading);
     font-size: 0.5625rem;
     color: var(--accent-blue);
     margin-bottom: 1rem;
@@ -112,7 +112,7 @@
   }
 
   .skill-tag {
-    font-family: var(--font-retro);
+    font-family: var(--font-mono);
     font-size: 1.125rem;
     padding: 0.25rem 0.75rem;
     background: var(--bg-mid);

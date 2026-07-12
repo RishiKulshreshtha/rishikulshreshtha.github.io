@@ -1,93 +1,71 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Navigation — locking', () => {
-  test.beforeEach(async ({ page }) => {
+test.describe('Main navigation', () => {
+  test('nav links go to real, unlocked routes', async ({ page }) => {
     await page.goto('/');
+    await expect(page.locator('.nav__lock')).toHaveCount(0);
+
+    await page.locator('a.nav__link', { hasText: 'ABOUT' }).click();
+    await expect(page).toHaveURL(/\/about$/);
+    await expect(page.locator('h1, h2').filter({ hasText: 'ABOUT ME' })).toBeVisible();
+
+    await page.locator('a.nav__link', { hasText: 'PROJECTS' }).click();
+    await expect(page).toHaveURL(/\/projects$/);
   });
 
-  test('all four nav links are locked on first load', async ({ page }) => {
-    const lockIcons = page.locator('.nav__lock');
-    await expect(lockIcons).toHaveCount(4);
+  test('active nav link is marked with aria-current', async ({ page }) => {
+    await page.goto('/about');
+    await expect(page.locator('a.nav__link[href="/about"]')).toHaveAttribute('aria-current', 'page');
   });
 
-  test('clicking a locked nav link does not navigate to that section', async ({ page }) => {
-    const aboutLink = page.locator('a.nav__link[href="#about"]');
-    await aboutLink.click();
-    // About section should not exist in DOM yet
-    await expect(page.locator('#about')).not.toBeAttached();
-  });
-
-  test('clicking locked ABOUT link scrolls to the Memory Match game', async ({ page }) => {
-    await page.locator('a.nav__link[href="#about"]').click();
-    await expect(page.locator('#game-memory')).toBeInViewport();
-  });
-
-  test('SKILLS nav link is locked on first load (game 2 not won)', async ({ page }) => {
-    const skillsLink = page.locator('a.nav__link[href="#skills"]');
-    await expect(skillsLink).toHaveAttribute('aria-label', /locked/i);
+  test('logo links back to home', async ({ page }) => {
+    await page.goto('/about');
+    await page.locator('.nav__logo').click();
+    await expect(page).toHaveURL(/\/$/);
   });
 });
 
 test.describe('Footer', () => {
-  test('PRESS START TO CONTINUE is a button', async ({ page }) => {
-    await page.goto('/');
-    await page.locator('.skip-gate__btn').click();
-    await page.waitForTimeout(1000);
-    await expect(page.locator('.footer__credits')).toBeVisible();
-    const tag = await page.locator('.footer__credits').evaluate(el => el.tagName.toLowerCase());
-    expect(tag).toBe('button');
-  });
-
-  test('clicking PRESS START scrolls to hero section', async ({ page }) => {
-    await page.goto('/');
-    await page.locator('.skip-gate__btn').click();
-    await page.waitForTimeout(1000);
-    // Scroll to bottom first
-    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-    await page.locator('.footer__credits').click();
-    await expect(page.locator('#hero')).toBeInViewport({ timeout: 3000 });
-  });
-});
-
-test.describe('Hero — locked buttons', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
   });
 
-  test('EXPLORE and SAY HELLO buttons are present in hero', async ({ page }) => {
-    await expect(page.locator('.hero__actions button:has-text("EXPLORE")')).toBeVisible();
-    await expect(page.locator('.hero__actions button:has-text("SAY HELLO")')).toBeVisible();
+  test('social links and footer meta links are present', async ({ page }) => {
+    await expect(page.locator('.footer__link').first()).toBeVisible();
+    await expect(page.locator('.footer__copy')).toContainText('Rishi Kulshreshtha');
   });
 
-  test('clicking EXPLORE when locked shows a locked message', async ({ page }) => {
-    await page.locator('.hero__actions button:has-text("EXPLORE")').click();
-    await expect(page.locator('.hero__locked-msg')).toBeVisible();
-    await expect(page.locator('.hero__locked-msg')).toContainText('MEMORY MATCH');
+  test('footer links to Playground', async ({ page }) => {
+    await page.locator('.footer__meta-link', { hasText: 'PLAYGROUND' }).click();
+    await expect(page).toHaveURL(/\/playground$/);
   });
 
-  test('clicking SAY HELLO when locked shows a locked message', async ({ page }) => {
-    await page.locator('.hero__actions button:has-text("SAY HELLO")').click();
-    await expect(page.locator('.hero__locked-msg')).toBeVisible();
-    await expect(page.locator('.hero__locked-msg')).toContainText('skip_games.sh');
+  test('footer links to Accessibility Statement', async ({ page }) => {
+    await page.locator('.footer__meta-link', { hasText: 'ACCESSIBILITY STATEMENT' }).click();
+    await expect(page).toHaveURL(/\/accessibility-statement$/);
+  });
+});
+
+test.describe('Hero', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
   });
 
-  test('clicking EXPLORE when locked scrolls to Memory Match game', async ({ page }) => {
-    await page.locator('.hero__actions button:has-text("EXPLORE")').click();
-    await expect(page.locator('#game-memory')).toBeInViewport({ timeout: 2000 });
+  test('EXPLORE and SAY HELLO are real, unlocked links', async ({ page }) => {
+    const explore = page.locator('.hero__actions a', { hasText: 'EXPLORE' });
+    const sayHello = page.locator('.hero__actions a', { hasText: 'SAY HELLO' });
+    await expect(explore).toBeVisible();
+    await expect(sayHello).toBeVisible();
   });
 
-  test('locked message disappears after 3 seconds', async ({ page }) => {
-    await page.locator('.hero__actions button:has-text("EXPLORE")').click();
-    await expect(page.locator('.hero__locked-msg')).toBeVisible();
-    await page.waitForTimeout(3200);
-    await expect(page.locator('.hero__locked-msg')).not.toBeVisible();
+  test('EXPLORE scrolls to the highlights section', async ({ page }) => {
+    await page.locator('.hero__actions a', { hasText: 'EXPLORE' }).click();
+    await expect(page.locator('#highlights')).toBeInViewport({ timeout: 2000 });
   });
 
-  test('EXPLORE works normally after skip', async ({ page }) => {
-    await page.locator('.skip-gate__btn').click();
-    await page.waitForTimeout(1000);
-    await page.locator('.hero__actions button:has-text("EXPLORE")').click();
-    await expect(page.locator('#about')).toBeInViewport({ timeout: 2000 });
+  test('SAY HELLO scrolls to the contact section', async ({ page }) => {
+    await page.locator('.hero__actions a', { hasText: 'SAY HELLO' }).click();
+    await expect(page.locator('#contact')).toBeInViewport({ timeout: 2000 });
   });
 });
 
@@ -99,36 +77,9 @@ test.describe('Cursor', () => {
   });
 });
 
-test.describe('Navigation — skip gate', () => {
-  test('skip button is visible below the Memory Match game', async ({ page }) => {
-    await page.goto('/');
-    await expect(page.locator('.skip-gate__btn')).toBeVisible();
-  });
-
-  test('skip button text reflects terminal style', async ({ page }) => {
-    await page.goto('/');
-    await expect(page.locator('.skip-gate__btn')).toContainText('skip_games.sh');
-  });
-
-  test('clicking skip reveals all sections', async ({ page }) => {
-    await page.goto('/');
-    await page.locator('.skip-gate__btn').click();
-    await expect(page.locator('#about')).toBeVisible({ timeout: 3000 });
-    await expect(page.locator('#skills')).toBeVisible({ timeout: 3000 });
-    await expect(page.locator('#achievements')).toBeVisible({ timeout: 3000 });
-    await expect(page.locator('#contact')).toBeVisible({ timeout: 3000 });
-  });
-
-  test('skip gate disappears after skipping', async ({ page }) => {
-    await page.goto('/');
-    await page.locator('.skip-gate__btn').click();
-    await expect(page.locator('.skip-gate')).not.toBeVisible({ timeout: 3000 });
-  });
-
-  test('after skipping, nav links have no lock icons', async ({ page }) => {
-    await page.goto('/');
-    await page.locator('.skip-gate__btn').click();
-    await page.waitForTimeout(1000);
-    await expect(page.locator('.nav__lock')).toHaveCount(0);
+test.describe('404 handling', () => {
+  test('an unknown writing slug 404s', async ({ page }) => {
+    const response = await page.goto('/writing/this-post-does-not-exist');
+    expect(response.status()).toBe(404);
   });
 });

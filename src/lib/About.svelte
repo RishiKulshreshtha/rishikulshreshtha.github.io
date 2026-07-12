@@ -14,7 +14,7 @@
         <div class="player__details">
           <div class="player__detail">
             <span class="player__detail-label">CLASS</span>
-            <span class="player__detail-value">AI Enthusiast & Senior Drupal Developer</span>
+            <span class="player__detail-value">Senior Drupal Engineer — Accessibility & AI-Ready Infrastructure</span>
           </div>
           <div class="player__detail">
             <span class="player__detail-label">GUILD</span>
@@ -26,7 +26,7 @@
           </div>
           <div class="player__detail">
             <span class="player__detail-label">XP</span>
-            <span class="player__detail-value">14+ Years</span>
+            <span class="player__detail-value">Drupal since 2011</span>
           </div>
         </div>
       </div>
@@ -51,9 +51,9 @@
       </div>
 
       <div class="player__bio dialog-box" use:fadeIn>
-        <p>I'm an AI enthusiast and seasoned Drupal developer who's passionate about bridging open-source CMS with AI/LLM technologies. With 14+ years building enterprise web solutions, I now focus on how AI can transform the way we build, manage, and interact with the web.</p>
-        <p>From crafting Drupal modules like LLMs.txt Gen that make sites AI-friendly, to experimenting with LLM agents and intelligent automation &mdash; I believe the future of the web is AI-augmented, and open-source is the way to build it.</p>
-        <p>When I'm not coding, you'll find me mentoring fellow developers, contributing to the Drupal community, or diving into the latest AI research and tooling.</p>
+        <p>I'm a senior Drupal engineer focused on web accessibility and AI-readiness for public-interest websites — higher education, research, and government. I've been building with Drupal since 2011.</p>
+        <p>I maintain LLMs.txt Gen and other open-source Drupal modules that make sites easier for both people using assistive technology and AI systems to understand and use &mdash; accessibility (WCAG, Section 508, ADA) and AI-readiness solve overlapping problems, and open source is how I build for both.</p>
+        <p>When I'm not coding, you'll find me mentoring fellow developers or contributing to the Drupal community.</p>
       </div>
     </div>
   </div>
@@ -93,7 +93,7 @@
   }
 
   .player__detail-label {
-    font-family: var(--font-pixel);
+    font-family: var(--font-heading);
     font-size: 0.5rem;
     color: var(--accent-gold);
     min-width: 5rem;
@@ -107,7 +107,7 @@
   }
 
   .player__subtitle {
-    font-family: var(--font-pixel);
+    font-family: var(--font-heading);
     font-size: 0.5625rem;
     color: var(--accent-gold);
     margin-bottom: 1rem;
@@ -132,7 +132,7 @@
   }
 
   .player__lang-name {
-    font-family: var(--font-pixel);
+    font-family: var(--font-heading);
     font-size: 0.4375rem;
     color: var(--text);
     min-width: 5rem;
@@ -140,7 +140,7 @@
   }
 
   .player__bio p {
-    font-family: var(--font-retro);
+    font-family: var(--font-mono);
     font-size: 1.1875rem;
     color: var(--text-dim);
     line-height: 1.8;

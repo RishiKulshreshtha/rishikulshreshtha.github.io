@@ -1,36 +1,9 @@
 <script>
-  import { playError } from './sound.js';
-
-  let { game1Won = false, game3Won = false } = $props();
-
-  let lockedMsg = $state('');
-  let msgTimer = null;
-
-  function showMsg(msg, scrollTarget) {
-    lockedMsg = msg;
-    clearTimeout(msgTimer);
-    msgTimer = setTimeout(() => { lockedMsg = ''; }, 3000);
-    document.getElementById(scrollTarget)?.scrollIntoView({ behavior: 'smooth' });
-  }
-
-  function explore(e) {
+  function smoothScroll(e, id) {
+    const target = document.getElementById(id);
+    if (!target) return;
     e.preventDefault();
-    if (!game1Won) {
-      playError();
-      showMsg('// WIN MEMORY MATCH FIRST — OR USE ./skip_games.sh BELOW', 'game-memory');
-    } else {
-      document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
-
-  function sayHello(e) {
-    e.preventDefault();
-    if (!game3Won) {
-      playError();
-      showMsg('// CLEAR ALL 3 GAMES TO UNLOCK CONTACT — OR USE ./skip_games.sh BELOW', 'game-memory');
-    } else {
-      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-    }
+    target.scrollIntoView({ behavior: 'smooth' });
   }
 </script>
 
@@ -40,23 +13,18 @@
       <p class="hero__greeting">HELLO WORLD!<span class="hero__cursor"></span></p>
       <h1 class="hero__name">RISHI<br>KULSHRESHTHA</h1>
       <div class="hero__lines">
-        <p class="hero__line">AI Enthusiast & Builder</p>
+        <p class="hero__line">Web Accessibility Engineer</p>
         <p class="hero__line">Senior Drupal Developer</p>
-        <p class="hero__line">Open Source Advocate</p>
+        <p class="hero__line">AI-Ready Infrastructure</p>
       </div>
       <div class="hero__actions">
-        <button class="btn btn--primary" onclick={explore} aria-label={game1Won ? 'Explore portfolio' : 'Explore — locked until Memory Match is won'}>
+        <a class="btn btn--primary" href="#highlights" onclick={(e) => smoothScroll(e, 'highlights')}>
           EXPLORE <i class="fas fa-arrow-down" aria-hidden="true"></i>
-        </button>
-        <button class="btn btn--outline" onclick={sayHello} aria-label={game3Won ? 'Say hello' : 'Say hello — locked until all games are won'}>
+        </a>
+        <a class="btn btn--outline" href="#contact" onclick={(e) => smoothScroll(e, 'contact')}>
           SAY HELLO
-        </button>
+        </a>
       </div>
-      {#if lockedMsg}
-        <p class="hero__locked-msg" aria-live="polite">
-          <span class="hero__locked-caret">&gt;</span> {lockedMsg}
-        </p>
-      {/if}
     </div>
     <div class="hero__image">
       <picture>
@@ -69,10 +37,9 @@
 
 <style>
   .hero {
-    min-height: 100vh;
+    min-height: calc(100vh - var(--nav-height));
     display: flex;
     align-items: center;
-    padding-top: var(--nav-height);
     position: relative;
     overflow: hidden;
   }
@@ -98,8 +65,8 @@
   }
 
   .hero__greeting {
-    font-family: var(--font-pixel);
-    font-size: 0.625rem;
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
     color: var(--accent-green);
     margin-bottom: 1rem;
     letter-spacing: 0.05em;
@@ -119,7 +86,7 @@
   }
 
   .hero__name {
-    font-family: var(--font-pixel);
+    font-family: var(--font-heading);
     font-size: 1.5rem;
     line-height: 1.8;
     letter-spacing: 0.02em;
@@ -134,7 +101,7 @@
   }
 
   .hero__line {
-    font-family: var(--font-retro);
+    font-family: var(--font-mono);
     font-size: 1.375rem;
     color: var(--text-dim);
     line-height: 1.8;
@@ -188,7 +155,7 @@
 
   @media (min-width: 768px) {
     .hero__greeting {
-      font-size: 0.75rem;
+      font-size: 1rem;
     }
 
     .hero__name {
@@ -221,7 +188,7 @@
     }
 
     .hero__greeting {
-      font-size: 0.875rem;
+      font-size: 1.125rem;
       margin-bottom: 1.5rem;
     }
 
@@ -239,31 +206,13 @@
     }
   }
 
-  .hero__locked-msg {
-    margin-top: 1rem;
-    font-family: var(--font-pixel);
-    font-size: 0.4rem;
-    color: var(--accent-orange);
-    letter-spacing: 0.05em;
-    line-height: 1.8;
-    animation: fadeInUp 0.2s ease forwards;
-  }
-
-  .hero__locked-caret {
-    color: var(--accent-green);
-  }
-
-  @media (min-width: 768px) {
-    .hero__locked-msg { font-size: 0.45rem; }
-  }
-
   @media (min-width: 1280px) {
     .hero__name {
       font-size: 3.25rem;
     }
 
     .hero__greeting {
-      font-size: 1rem;
+      font-size: 1.25rem;
     }
 
     .hero__line {

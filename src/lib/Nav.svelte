@@ -1,61 +1,26 @@
 <script>
-  let { game1Won = false, game2Won = false, game3Won = false } = $props();
+  import { browser } from '$app/environment';
+  import { page } from '$app/stores';
 
   let menuOpen = $state(false);
-  let activeSection = $state('hero');
-  let theme = $state(document.documentElement.getAttribute('data-theme') || 'dark');
+  let theme = $state(browser ? document.documentElement.getAttribute('data-theme') || 'dark' : 'dark');
 
   const links = [
-    { id: 'about',        label: 'ABOUT',        gate: 'game-memory'  },
-    { id: 'skills',       label: 'SKILLS',        gate: 'game-sliding' },
-    { id: 'achievements', label: 'ACHIEVEMENTS',  gate: 'game-whack'   },
-    { id: 'contact',      label: 'CONTACT',       gate: 'game-whack'   },
+    { href: '/about', label: 'ABOUT' },
+    { href: '/projects', label: 'PROJECTS' },
   ];
-
-  function isLocked(id) {
-    if (id === 'about') return !game1Won;
-    if (id === 'skills') return !game2Won;
-    if (id === 'achievements' || id === 'contact') return !game3Won;
-    return false;
-  }
-
-  function navigate(e, link) {
-    e.preventDefault();
-    if (isLocked(link.id)) {
-      document.getElementById(link.gate)?.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' });
-    }
-    menuOpen = false;
-  }
 
   function toggleTheme() {
     theme = theme === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('rk-theme', theme);
   }
-
-  $effect(() => {
-    const onScroll = () => {
-      const sections = document.querySelectorAll('section[id]');
-      const y = window.scrollY + 120;
-      for (const s of sections) {
-        if (y >= s.offsetTop - 120 && y < s.offsetTop - 120 + s.offsetHeight) {
-          activeSection = s.id;
-          break;
-        }
-      }
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
-  });
 </script>
 
 <nav class="nav" aria-label="Main navigation">
   <div class="nav__inner container">
 
-    <a class="nav__logo" href="#hero" aria-label="RK_ — back to top">RK_</a>
+    <a class="nav__logo" href="/" aria-label="RK_ — home">RK_</a>
 
     <!-- Links: absolute dropdown on mobile, inline row on desktop -->
     <ul class="nav__links" class:nav__links--open={menuOpen} id="nav-links" role="list">
@@ -63,17 +28,12 @@
         <li>
           <a
             class="nav__link"
-            class:nav__link--active={activeSection === link.id}
-            class:nav__link--locked={isLocked(link.id)}
-            href={`#${link.id}`}
-            onclick={(e) => navigate(e, link)}
-            aria-label={isLocked(link.id) ? `${link.label} — locked, win the game to unlock` : link.label}
-            aria-current={activeSection === link.id ? 'true' : undefined}
+            class:nav__link--active={$page.url.pathname === link.href}
+            href={link.href}
+            onclick={() => (menuOpen = false)}
+            aria-current={$page.url.pathname === link.href ? 'page' : undefined}
           >
             {link.label}
-            {#if isLocked(link.id)}
-              <i class="fas fa-lock nav__lock" aria-hidden="true"></i>
-            {/if}
           </a>
         </li>
       {/each}
@@ -131,8 +91,8 @@
   }
 
   .nav__logo {
-    font-family: var(--font-pixel);
-    font-size: 0.75rem;
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
     color: var(--accent-gold);
     text-decoration: none;
     letter-spacing: 0.05em;
@@ -163,8 +123,8 @@
   }
 
   .nav__link {
-    font-family: var(--font-pixel);
-    font-size: 0.5rem;
+    font-family: var(--font-heading);
+    font-size: 0.8125rem;
     color: var(--text-dim);
     text-decoration: none;
     padding: 0.875rem 1rem;
@@ -179,20 +139,6 @@
   .nav__link:hover,
   .nav__link--active {
     color: var(--accent-gold);
-  }
-
-  .nav__link--locked {
-    color: var(--text-muted);
-    opacity: 0.65;
-  }
-
-  .nav__link--locked:hover {
-    color: var(--accent-orange);
-    opacity: 1;
-  }
-
-  .nav__lock {
-    font-size: 0.45rem;
   }
 
   /* Right-side controls */
@@ -248,12 +194,12 @@
     }
 
     .nav__link {
-      font-size: 0.5625rem;
+      font-size: 0.875rem;
       padding: 0.5rem 0.875rem;
     }
 
     .nav__logo {
-      font-size: 0.875rem;
+      font-size: 1rem;
     }
 
     .nav__end {
@@ -268,12 +214,12 @@
 
   @media (min-width: 1280px) {
     .nav__link {
-      font-size: 0.625rem;
+      font-size: 0.9375rem;
       padding: 0.5rem 1.125rem;
     }
 
     .nav__logo {
-      font-size: 1rem;
+      font-size: 1.125rem;
     }
   }
 </style>

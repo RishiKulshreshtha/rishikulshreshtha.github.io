@@ -14,6 +14,7 @@
 
     let ship, bullets, asteroids, stars, particles;
     let spawnTimer, shootTimer, frameCount, animFrame;
+    let destroyScore = 0;
     let keys = {};
 
     function initStars() {
@@ -38,6 +39,7 @@
       shootTimer = 0;
       frameCount = 0;
       score = 0;
+      destroyScore = 0;
       if (!stars || stars.length === 0) stars = initStars();
     }
 
@@ -106,115 +108,6 @@
     window.addEventListener('keyup', onKeyUp);
 
     function update() {
-      // Stars always animate
-      for (const s of stars) {
-        s.y += s.speed;
-        if (s.y > H) { s.y = 0; s.x = Math.random() * W; }
-      }
-
-      // Particles always animate
-      for (const p of particles) {
-        p.x += p.vx;
-        p.y += p.vy;
-        p.life--;
-      }
-      particles = particles.filter((p) => p.life > 0);
-
-      if (gameState !== 'running') return;
-
-      frameCount++;
-
-      // Ship movement
-      const shipSpeed = 3;
-      if (keys['ArrowLeft'] || keys['KeyA']) ship.x -= shipSpeed;
-      if (keys['ArrowRight'] || keys['KeyD']) ship.x += shipSpeed;
-
-      // Touch movement
-      if (touchX !== null) {
-        const target = touchX - ship.w / 2;
-        const diff = target - ship.x;
-        ship.x += Math.sign(diff) * Math.min(Math.abs(diff), shipSpeed + 1);
-      }
-
-      ship.x = Math.max(0, Math.min(W - ship.w, ship.x));
-
-      // Auto-shoot
-      shootTimer++;
-      const canShoot = keys['Space'] || keys['ArrowUp'] || keys['KeyW'] || touchX !== null || true;
-      if (canShoot && shootTimer > 8) {
-        bullets.push({ x: ship.x + ship.w / 2 - 1, y: ship.y - 4, w: 2, h: 6 });
-        shootTimer = 0;
-      }
-
-      // Bullets
-      for (const b of bullets) b.y -= 4;
-      bullets = bullets.filter((b) => b.y > -b.h);
-
-      // Spawn asteroids
-      spawnTimer++;
-      const rate = Math.max(15, 40 - frameCount / 200);
-      if (spawnTimer > rate) {
-        const size = 6 + Math.floor(Math.random() * 14);
-        asteroids.push({
-          x: Math.floor(Math.random() * (W - size)),
-          y: -size,
-          size,
-          speed: 0.8 + Math.random() * 1.5 + frameCount / 2000,
-          color: ['#b13e53', '#ef7d57', '#5d275d', '#566c86', '#38b764'][
-            Math.floor(Math.random() * 5)
-          ],
-        });
-        spawnTimer = 0;
-      }
-
-      for (const a of asteroids) a.y += a.speed;
-      asteroids = asteroids.filter((a) => a.y < H + a.size);
-
-      // Bullet-asteroid collision
-      for (let i = bullets.length - 1; i >= 0; i--) {
-        for (let j = asteroids.length - 1; j >= 0; j--) {
-          const b = bullets[i];
-          const a = asteroids[j];
-          if (b && a && b.x + b.w > a.x && b.x < a.x + a.size && b.y < a.y + a.size && b.y + b.h > a.y) {
-            addParticles(a.x + a.size / 2, a.y + a.size / 2, a.color, 6);
-            bullets.splice(i, 1);
-            asteroids.splice(j, 1);
-            score += 10;
-            break;
-          }
-        }
-      }
-
-      // Ship-asteroid collision
-      for (const a of asteroids) {
-        if (
-          ship.x + ship.w - 2 > a.x && ship.x + 2 < a.x + a.size &&
-          ship.y + ship.h > a.y && ship.y < a.y + a.size
-        ) {
-          addParticles(ship.x + ship.w / 2, ship.y + ship.h / 2, '#ffcd75', 12);
-          gameState = 'over';
-          if (score > highScore) highScore = score;
-          return;
-        }
-      }
-
-      score = Math.floor(frameCount / 6) + score;
-      // Recalculate score simply
-      score = 0;
-      // Use a running score approach instead
-    }
-
-    // Fix score: track separately
-    let destroyScore = 0;
-
-    // Override update's score handling
-    const origReset = reset;
-    reset = function () {
-      origReset();
-      destroyScore = 0;
-    };
-
-    function updateFixed() {
       for (const s of stars) {
         s.y += s.speed;
         if (s.y > H) { s.y = 0; s.x = Math.random() * W; }
@@ -381,7 +274,7 @@
     }
 
     function loop() {
-      updateFixed();
+      update();
       draw();
       animFrame = requestAnimationFrame(loop);
     }
@@ -409,7 +302,12 @@
         <p class="game__hint">Destroy asteroids and survive! Arrows / Touch to steer. Auto-fires.</p>
       </div>
       <div class="game__viewport game__viewport--space">
-        <canvas bind:this={canvas} width={240} height={200}></canvas>
+        <canvas
+          bind:this={canvas}
+          width={240}
+          height={200}
+          aria-label="Asteroid Dodge — a visual arcade minigame. Not screen-reader accessible; steer with arrow keys or touch, auto-fires."
+        ></canvas>
       </div>
     </div>
   </div>
@@ -427,7 +325,7 @@
   }
 
   .game__title {
-    font-family: var(--font-pixel);
+    font-family: var(--font-heading);
     font-size: 0.875rem;
     color: var(--accent-gold);
     margin-top: 0.5rem;
@@ -435,7 +333,7 @@
   }
 
   .game__hint {
-    font-family: var(--font-retro);
+    font-family: var(--font-mono);
     font-size: 1.125rem;
     color: var(--text-muted);
     margin-top: 0.5rem;

@@ -36,18 +36,21 @@
   }
 </script>
 
-<section class="section section--game" id="game-sliding" aria-label="Sliding Puzzle game — win to unlock the next section">
+<section class="section section--game" id="game-sliding" aria-label="Sliding Puzzle game">
   <div class="container">
     <div class="game">
       <div class="game__header">
         <h2 class="game__title">SLIDING PUZZLE</h2>
-        <p class="game__hint">Arrange tiles in order to unlock the next section!</p>
+        <p class="game__hint">Arrange the tiles in order!</p>
       </div>
 
       {#if won}
         <div class="game__win-overlay" aria-live="assertive" role="status">
           <p class="game__win-title">PUZZLE SOLVED!</p>
-          <p class="game__win-msg">BRILLIANT MOVE SEQUENCE!<br>LOADING YOUR SKILL TREE...</p>
+          <p class="game__win-msg">BRILLIANT MOVE SEQUENCE!</p>
+          <button class="btn btn--outline game__restart" onclick={reset}>
+            PLAY AGAIN <i class="fas fa-redo"></i>
+          </button>
         </div>
       {:else}
         <div class="game__stats" aria-live="polite" role="status">
@@ -91,7 +94,7 @@
   }
 
   .game__title {
-    font-family: var(--font-pixel);
+    font-family: var(--font-heading);
     font-size: 0.875rem;
     color: var(--accent-gold);
     margin-top: 0.5rem;
@@ -99,7 +102,7 @@
   }
 
   .game__hint {
-    font-family: var(--font-retro);
+    font-family: var(--font-mono);
     font-size: 1.125rem;
     color: var(--text-dim);
     margin-top: 0.5rem;
@@ -113,7 +116,7 @@
   }
 
   .game__stat {
-    font-family: var(--font-pixel);
+    font-family: var(--font-heading);
     font-size: 0.5rem;
     color: var(--text-dim);
     letter-spacing: 0.05em;
@@ -129,7 +132,7 @@
   }
 
   .game__win-title {
-    font-family: var(--font-pixel);
+    font-family: var(--font-heading);
     font-size: 0.75rem;
     color: var(--accent-green);
     letter-spacing: 0.1em;
@@ -138,7 +141,7 @@
   }
 
   .game__win-msg {
-    font-family: var(--font-retro);
+    font-family: var(--font-mono);
     font-size: 1.375rem;
     color: var(--text-dim);
     line-height: 1.8;
@@ -156,7 +159,7 @@
     background: var(--bg-light);
     border: 3px solid var(--border-color);
     color: var(--text);
-    font-family: var(--font-pixel);
+    font-family: var(--font-heading);
     font-size: 1.25rem;
     cursor: pointer;
     display: flex;

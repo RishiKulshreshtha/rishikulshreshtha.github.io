@@ -1,0 +1,13 @@
+import{a,f as i}from"../chunks/BpFGzfQM.js";import"../chunks/SKXzaIfE.js";import{T as o,a1 as r}from"../chunks/C4c996NW.js";import{S as n}from"../chunks/DYlISOnm.js";var h=i(`<!> <section class="a11y section" aria-label="Accessibility statement"><div class="container"><div class="section__header"><span class="section__label">// CONFORMANCE</span> <h1 class="section__title">ACCESSIBILITY STATEMENT</h1></div> <div class="a11y__body prose svelte-djhs9b"><p class="svelte-djhs9b">This site targets WCAG 2.1 Level AA conformance. That means: full keyboard operability,
+      sufficient color contrast in both light and dark themes, proper landmarks and heading
+      structure, and visible focus indicators throughout.</p> <h2 class="svelte-djhs9b">Known limitation</h2> <p class="svelte-djhs9b">The five games on the <a href="/playground" class="svelte-djhs9b">Playground</a> page are visual, mouse/keyboard/touch-driven
+      arcade minigames (two use HTML canvas). They are not operable or meaningful via screen reader, and that's
+      disclosed on that page rather than hidden. Nothing on the rest of the site — About, Projects, Talks,
+      Writing, or Home — depends on them; they're an optional curiosity, not gated content.</p> <h2 class="svelte-djhs9b">Third-party services</h2> <p class="svelte-djhs9b">This site loads Google Tag Manager (basic page-view analytics) on every page, and the
+      "Say Hello" contact form on the homepage is embedded from Fillout. Neither is used to
+      collect anything beyond standard analytics and whatever you voluntarily submit in the
+      contact form; both are outside this statement's direct control, so their own accessibility
+      and privacy practices may differ from the rest of this site.</p> <h2 class="svelte-djhs9b">Last reviewed</h2> <p class="svelte-djhs9b">This statement was last reviewed alongside the site's SvelteKit rebuild. If you hit a barrier
+      anywhere on the site outside the Playground page, that's a bug, not a known limitation — please
+      report it.</p> <h2 class="svelte-djhs9b">Reporting an issue</h2> <p class="svelte-djhs9b">Open an issue on <a href="https://github.com/RishiKulshreshtha/rishikulshreshtha.github.io" target="_blank" rel="noopener" class="svelte-djhs9b">GitHub</a>,
+      or reach out via the contact form on the <a href="/" class="svelte-djhs9b">homepage</a>.</p></div></div></section>`,1);function m(t){var e=h(),s=o(e);n(s,{title:"Accessibility Statement — Rishi Kulshreshtha",description:"Accessibility conformance statement for rishikulshreshtha.github.io — target level, known limitations, third-party services, and how to report an issue.",path:"/accessibility-statement"}),r(2),a(t,e)}export{m as component};

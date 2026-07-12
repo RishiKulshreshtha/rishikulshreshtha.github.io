@@ -76,7 +76,7 @@
   });
 </script>
 
-<section class="section section--game" id="game-whack" aria-label="Whack-a-Bug game — win to unlock the final sections">
+<section class="section section--game" id="game-whack" aria-label="Whack-a-Bug game">
   <div class="container">
     <div class="game">
       <div class="game__header">
@@ -87,7 +87,10 @@
       {#if won}
         <div class="game__win-overlay" aria-live="assertive" role="status">
           <p class="game__win-title">ALL BUGS SQUASHED!</p>
-          <p class="game__win-msg">LEGENDARY DEBUGGER!<br>UNLOCKING ACHIEVEMENTS + CONTACT...</p>
+          <p class="game__win-msg">LEGENDARY DEBUGGER!</p>
+          <button class="btn btn--outline game__restart" onclick={startGame}>
+            PLAY AGAIN <i class="fas fa-redo"></i>
+          </button>
         </div>
       {:else if !started && !lost}
         <button class="btn btn--primary game__start" onclick={startGame}>
@@ -141,7 +144,7 @@
   }
 
   .game__title {
-    font-family: var(--font-pixel);
+    font-family: var(--font-heading);
     font-size: 0.875rem;
     color: var(--accent-gold);
     margin-top: 0.5rem;
@@ -149,7 +152,7 @@
   }
 
   .game__hint {
-    font-family: var(--font-retro);
+    font-family: var(--font-mono);
     font-size: 1.125rem;
     color: var(--text-dim);
     margin-top: 0.5rem;
@@ -167,7 +170,7 @@
   }
 
   .game__stat {
-    font-family: var(--font-pixel);
+    font-family: var(--font-heading);
     font-size: 0.5rem;
     color: var(--text-dim);
     letter-spacing: 0.05em;
@@ -192,7 +195,7 @@
   }
 
   .game__win-title {
-    font-family: var(--font-pixel);
+    font-family: var(--font-heading);
     font-size: 0.75rem;
     color: var(--accent-green);
     letter-spacing: 0.1em;
@@ -201,7 +204,7 @@
   }
 
   .game__win-msg {
-    font-family: var(--font-retro);
+    font-family: var(--font-mono);
     font-size: 1.375rem;
     color: var(--text-dim);
     line-height: 1.8;

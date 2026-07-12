@@ -30,7 +30,7 @@
     { icon: 'fas fa-graduation-cap', text: 'Community Mentoring' },
     { icon: 'fas fa-comments', text: 'Slack, IRC & Forums' },
     { icon: 'fas fa-magnifying-glass', text: 'Project App Reviews' },
-    { icon: 'fas fa-robot', text: 'AI/LLM Integration Pioneer' },
+    { icon: 'fas fa-robot', text: 'llms.txt / AI-Ready Content Tooling' },
   ];
 </script>
 
@@ -105,7 +105,7 @@
   }
 
   .project__name {
-    font-family: var(--font-pixel);
+    font-family: var(--font-heading);
     font-size: 0.5rem;
     letter-spacing: 0.05em;
     line-height: 1.6;

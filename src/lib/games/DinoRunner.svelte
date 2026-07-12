@@ -211,7 +211,12 @@
         <p class="game__hint">Jump over the bugs! Space / Tap to jump.</p>
       </div>
       <div class="game__viewport">
-        <canvas bind:this={canvas} width={300} height={100}></canvas>
+        <canvas
+          bind:this={canvas}
+          width={300}
+          height={100}
+          aria-label="Bug Runner — a visual arcade minigame. Not screen-reader accessible; press Space or tap to jump."
+        ></canvas>
       </div>
     </div>
   </div>
@@ -229,7 +234,7 @@
   }
 
   .game__title {
-    font-family: var(--font-pixel);
+    font-family: var(--font-heading);
     font-size: 0.875rem;
     color: var(--accent-gold);
     margin-top: 0.5rem;
@@ -237,7 +242,7 @@
   }
 
   .game__hint {
-    font-family: var(--font-retro);
+    font-family: var(--font-mono);
     font-size: 1.125rem;
     color: var(--text-muted);
     margin-top: 0.5rem;

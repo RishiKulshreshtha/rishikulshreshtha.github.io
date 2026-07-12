@@ -20,12 +20,11 @@
         </a>
       {/each}
     </div>
+    <nav class="footer__meta" aria-label="Footer">
+      <a class="footer__meta-link" href="/playground">// PLAYGROUND</a>
+      <a class="footer__meta-link" href="/accessibility-statement">// ACCESSIBILITY STATEMENT</a>
+    </nav>
     <p class="footer__copy">&copy; 2011&ndash;{year} Rishi Kulshreshtha</p>
-    <button
-      class="footer__credits"
-      onclick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
-      aria-label="Scroll back to top"
-    >GAME OVER? NEVER. PRESS START TO CONTINUE.</button>
   </div>
 </footer>
 
@@ -73,22 +72,24 @@
     color: var(--text-muted);
   }
 
-  .footer__credits {
-    font-family: var(--font-pixel);
-    font-size: 0.4375rem;
+  .footer__meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem;
+  }
+
+  .footer__meta-link {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
     color: var(--text-muted);
     letter-spacing: 0.05em;
     line-height: 1.8;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    animation: blink 1.2s step-end infinite;
+    text-decoration: none;
     transition: color var(--transition);
   }
 
-  .footer__credits:hover {
+  .footer__meta-link:hover {
     color: var(--accent-gold);
-    animation: none;
   }
 </style>

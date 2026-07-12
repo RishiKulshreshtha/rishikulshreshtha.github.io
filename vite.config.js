@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import { svelte } from '@sveltejs/vite-plugin-svelte';
+import { sveltekit } from '@sveltejs/kit/vite';
 import fs from 'fs';
 import path from 'path';
 
@@ -22,12 +22,7 @@ function copyPostsPlugin() {
 }
 
 export default defineConfig({
-  plugins: [svelte(), copyPostsPlugin()],
-  base: '/',
-  build: {
-    outDir: 'docs',
-    emptyOutDir: true,
-  },
+  plugins: [sveltekit(), copyPostsPlugin()],
   server: {
     allowedHosts: true,
   },
