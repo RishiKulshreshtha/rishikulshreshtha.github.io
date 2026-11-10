@@ -46,9 +46,13 @@ A separate, clearly-marked page of small arcade games (Memory Match, Sliding Puz
 - /projects — Open-source Drupal modules maintained
 - /playground — Optional arcade games (not gated, not required)
 - /accessibility-statement — Accessibility conformance statement
-- /rss.xml — Writing RSS feed
+- /writing — Writing index (posts at /writing/{slug}, tags at /writing/tags/{tag})
+- /rss.xml — Writing RSS feed (full content)
+- /writing/feed.xml — Writing Atom feed
+- /writing/feed.json — Writing JSON Feed
 - /about.md, /skills.md, /writing.md — Plain-markdown versions of key pages
-- /posts/{slug}.md — Individual post source markdown
+- /writing/{slug}.md — Individual post source markdown
 - /llms.txt — This file
 - /sitemap.xml — XML sitemap
+- /writing/sitemap.xml — XML sitemap for writing
 - /robots.txt — Robots exclusion

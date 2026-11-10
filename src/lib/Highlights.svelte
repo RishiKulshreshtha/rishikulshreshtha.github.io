@@ -37,7 +37,7 @@
         </a>
       {/each}
 
-      <a class="highlight-card" href="/writing" use:fadeIn>
+      <a class="highlight-card" href="/writing" data-sveltekit-reload use:fadeIn>
         <i class="fas fa-pen-nib highlight-card__icon" aria-hidden="true"></i>
         <span class="highlight-card__label">// WRITING</span>
         {#if latestPost}

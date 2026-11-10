@@ -1,0 +1,21 @@
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "Rishi Kulshreshtha — Writing",
+  "home_page_url": "https://rishikulshreshtha.github.io/writing",
+  "feed_url": "https://rishikulshreshtha.github.io/writing/feed.json",
+  "description": "Notes on Drupal, web accessibility, and AI-readiness from Rishi Kulshreshtha.",
+  "language": "en",
+  "authors": [{ "name": "Rishi Kulshreshtha", "url": "https://rishikulshreshtha.github.io/" }],
+  "items": [
+    {
+      "id": "https://rishikulshreshtha.github.io/writing/hello-world",
+      "url": "https://rishikulshreshtha.github.io/writing/hello-world",
+      "title": "Blog — Coming Soon",
+      "summary": "I'm setting up a blog to share thoughts on Drupal, AI, LLM integrations, and open source. Stay tuned.",
+      "content_html": "<h1>Blog — Coming Soon</h1>\n<p>I've been meaning to write for a while. Between shipping features at <a href=\"https://redfinllc.com/\">Redfin Solutions</a> and tinkering with LLM integrations on nights and weekends, there's a lot to share.</p>\n<h2>What to expect</h2>\n<ul>\n<li><strong>Drupal deep-dives</strong> — migrations, custom modules, performance tuning</li>\n<li><strong>AI + LLM in the real world</strong> — what actually works when you bolt AI onto a CMS</li>\n<li><strong>Open source notes</strong> — contributions, lessons, and the occasional war story</li>\n</ul>\n<h2>Why now?</h2>\n<p>The site just got rebuilt in Svelte 5. Adding a blog felt like the obvious next move — and yes, any page on this site can be read in plain markdown by appending <code>.md</code> to the URL.</p>\n<p>Stay tuned. First real post coming soon.</p>\n",
+      "date_published": "2026-03-06T00:00:00Z",
+      "date_modified": "2026-03-06T00:00:00Z",
+      "tags": ["meta","drupal","ai"]
+    }
+  ]
+}

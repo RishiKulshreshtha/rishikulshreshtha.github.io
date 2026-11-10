@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://rishikulshreshtha.github.io/sitemap.xml
+Sitemap: https://rishikulshreshtha.github.io/writing/sitemap.xml

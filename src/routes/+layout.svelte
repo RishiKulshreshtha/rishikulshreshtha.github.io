@@ -15,6 +15,7 @@
   {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": "https://rishikulshreshtha.github.io/#person",
     "name": "Rishi Kulshreshtha",
     "jobTitle": "Senior Drupal Engineer",
     "url": "https://rishikulshreshtha.github.io/",

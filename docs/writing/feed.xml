@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>Rishi Kulshreshtha — Writing</title>
+  <subtitle>Notes on Drupal, web accessibility, and AI-readiness from Rishi Kulshreshtha.</subtitle>
+  <link href="https://rishikulshreshtha.github.io/writing/feed.xml" rel="self"/>
+  <link href="https://rishikulshreshtha.github.io/writing"/>
+  <updated>2026-03-06T00:00:00Z</updated>
+  <id>https://rishikulshreshtha.github.io/writing</id>
+  <author>
+    <name>Rishi Kulshreshtha</name>
+    <uri>https://rishikulshreshtha.github.io/</uri>
+  </author>
+  <entry>
+    <title>Blog — Coming Soon</title>
+    <link href="https://rishikulshreshtha.github.io/writing/hello-world"/>
+    <published>2026-03-06T00:00:00Z</published>
+    <updated>2026-03-06T00:00:00Z</updated>
+    <id>https://rishikulshreshtha.github.io/writing/hello-world</id>
+    <summary>I&#39;m setting up a blog to share thoughts on Drupal, AI, LLM integrations, and open source. Stay tuned.</summary>
+    <content type="html">&lt;h1&gt;Blog — Coming Soon&lt;/h1&gt;
+&lt;p&gt;I&#39;ve been meaning to write for a while. Between shipping features at &lt;a href=&quot;https://redfinllc.com/&quot;&gt;Redfin Solutions&lt;/a&gt; and tinkering with LLM integrations on nights and weekends, there&#39;s a lot to share.&lt;/p&gt;
+&lt;h2&gt;What to expect&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Drupal deep-dives&lt;/strong&gt; — migrations, custom modules, performance tuning&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AI + LLM in the real world&lt;/strong&gt; — what actually works when you bolt AI onto a CMS&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Open source notes&lt;/strong&gt; — contributions, lessons, and the occasional war story&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Why now?&lt;/h2&gt;
+&lt;p&gt;The site just got rebuilt in Svelte 5. Adding a blog felt like the obvious next move — and yes, any page on this site can be read in plain markdown by appending &lt;code&gt;.md&lt;/code&gt; to the URL.&lt;/p&gt;
+&lt;p&gt;Stay tuned. First real post coming soon.&lt;/p&gt;
+</content>
+  </entry>
+</feed>

@@ -19,6 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - uses: actions/setup-node@v4
         with:
@@ -34,11 +36,11 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
 
-      - name: Run e2e tests
-        run: npm run test:e2e
-
       - name: Build
         run: npm run build
+
+      - name: Run e2e tests
+        run: npm run test:e2e
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
@@ -55,3 +57,20 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      # Third-party timestamped snapshots of new or changed posts (non-blocking)
+      - name: Archive changed posts on the Wayback Machine
+        continue-on-error: true
+        run: |
+          git diff --name-only --diff-filter=AM HEAD~1 HEAD -- 'blog/posts/*.md' | while read -r f; do
+            slug=$(basename "$f" .md)
+            if ! grep -qE '^draft:[[:space:]]*true' "$f"; then
+              url="https://rishikulshreshtha.github.io/writing/$slug"
+              echo "Archiving $url"
+              curl -fsS -m 60 "https://web.archive.org/save/$url" -o /dev/null || echo "Wayback save failed for $url"
+            fi
+          done

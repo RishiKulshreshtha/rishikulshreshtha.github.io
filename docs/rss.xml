@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rishi Kulshreshtha — Writing</title>
     <link>https://rishikulshreshtha.github.io/writing</link>
-    <description>Notes on Drupal, web accessibility, and AI-readiness.</description>
+    <atom:link href="https://rishikulshreshtha.github.io/rss.xml" rel="self" type="application/rss+xml"/>
+    <description>Notes on Drupal, web accessibility, and AI-readiness from Rishi Kulshreshtha.</description>
     <language>en-us</language>
+    <lastBuildDate>Fri, 06 Mar 2026 00:00:00 +0000</lastBuildDate>
     <item>
       <title>Blog — Coming Soon</title>
       <link>https://rishikulshreshtha.github.io/writing/hello-world</link>
-      <guid>https://rishikulshreshtha.github.io/writing/hello-world</guid>
-      <pubDate>Fri, 06 Mar 2026 00:00:00 GMT</pubDate>
-      <description>I&apos;m setting up a blog to share thoughts on Drupal, AI, LLM integrations, and open source. Stay tuned.</description>
+      <guid isPermaLink="true">https://rishikulshreshtha.github.io/writing/hello-world</guid>
+      <pubDate>Fri, 06 Mar 2026 00:00:00 +0000</pubDate>
+      <description>I&#39;m setting up a blog to share thoughts on Drupal, AI, LLM integrations, and open source. Stay tuned.</description>
+      <content:encoded xmlns:content="http://purl.org/rss/1.0/modules/content/">&lt;h1&gt;Blog — Coming Soon&lt;/h1&gt;
+&lt;p&gt;I&#39;ve been meaning to write for a while. Between shipping features at &lt;a href=&quot;https://redfinllc.com/&quot;&gt;Redfin Solutions&lt;/a&gt; and tinkering with LLM integrations on nights and weekends, there&#39;s a lot to share.&lt;/p&gt;
+&lt;h2&gt;What to expect&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Drupal deep-dives&lt;/strong&gt; — migrations, custom modules, performance tuning&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AI + LLM in the real world&lt;/strong&gt; — what actually works when you bolt AI onto a CMS&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Open source notes&lt;/strong&gt; — contributions, lessons, and the occasional war story&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Why now?&lt;/h2&gt;
+&lt;p&gt;The site just got rebuilt in Svelte 5. Adding a blog felt like the obvious next move — and yes, any page on this site can be read in plain markdown by appending &lt;code&gt;.md&lt;/code&gt; to the URL.&lt;/p&gt;
+&lt;p&gt;Stay tuned. First real post coming soon.&lt;/p&gt;
+</content:encoded>
     </item>
   </channel>
 </rss>

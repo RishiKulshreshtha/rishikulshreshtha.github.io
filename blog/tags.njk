@@ -1,0 +1,34 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: collections.tagList
+  size: 1
+  alias: tag
+permalink: "/writing/tags/{{ tag | slugifyTag }}.html"
+eleventyComputed:
+  title: "Writing tagged {{ tag }}"
+  description: "Posts tagged {{ tag }} by Rishi Kulshreshtha."
+  canonicalUrl: "{{ site.url }}/writing/tags/{{ tag | slugifyTag }}"
+---
+<section class="blog section" aria-label="Posts tagged {{ tag }}">
+  <div class="container">
+    <div class="section__header">
+      <span class="section__label">// TAG</span>
+      <h1 class="section__title">{{ tag | upper }}</h1>
+    </div>
+    <ul class="blog__list" role="list">
+      {%- for post in collections.posts | reverse %}
+      {%- if tag in post.data.tags %}
+      <li class="blog__card">
+        <a class="blog__link" href="/writing/{{ post.fileSlug }}">
+          <time class="blog__date" datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+          <h2 class="blog__title">{{ post.data.title }}</h2>
+          <p class="blog__desc">{{ post.data.description }}</p>
+        </a>
+      </li>
+      {%- endif %}
+      {%- endfor %}
+    </ul>
+    <p class="blog__feeds"><a href="/writing">&larr; All writing</a></p>
+  </div>
+</section>

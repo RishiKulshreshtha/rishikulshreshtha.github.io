@@ -13,6 +13,11 @@ test.describe('Main navigation', () => {
     await expect(page).toHaveURL(/\/projects$/);
   });
 
+  test('WRITING nav entry does a full load to the 11ty blog', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('a.nav__link[href="/writing"]')).toHaveAttribute('data-sveltekit-reload', '');
+  });
+
   test('active nav link is marked with aria-current', async ({ page }) => {
     await page.goto('/about');
     await expect(page.locator('a.nav__link[href="/about"]')).toHaveAttribute('aria-current', 'page');
@@ -74,12 +79,5 @@ test.describe('Cursor', () => {
     await page.goto('/');
     await expect(page.locator('.cursor__dot')).toBeAttached();
     await expect(page.locator('.cursor__ring')).toBeAttached();
-  });
-});
-
-test.describe('404 handling', () => {
-  test('an unknown writing slug 404s', async ({ page }) => {
-    const response = await page.goto('/writing/this-post-does-not-exist');
-    expect(response.status()).toBe(404);
   });
 });

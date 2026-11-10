@@ -1,0 +1,75 @@
+---
+layout: layouts/base.njk
+---
+<article class="post container" aria-labelledby="post-title">
+  <nav class="post__nav" aria-label="Blog navigation">
+    <a class="post__back" href="/writing"><i class="fas fa-arrow-left" aria-hidden="true"></i> BACK</a>
+  </nav>
+
+  <header class="post__header">
+    <p class="post__meta">
+      <time datetime="{{ date | isoDate }}">{{ date | readableDate }}</time>
+      {%- if updated %} · Updated <time datetime="{{ updated | isoDate }}">{{ updated | readableDate }}</time>{% endif %}
+      · {{ content | readingTime }} min read
+    </p>
+    <h1 class="post__title" id="post-title">{{ title }}</h1>
+    <p class="post__byline">By <a href="{{ site.author.aboutUrl }}" rel="author">{{ site.author.name }}</a></p>
+    {%- set postTags = tags | reject("equalto", "posts") | list %}
+    {%- if postTags.length %}
+    <ul class="tags" role="list" aria-label="Tags">
+      {%- for tag in postTags %}
+      <li><a class="tag" href="/writing/tags/{{ tag | slugifyTag }}">{{ tag }}</a></li>
+      {%- endfor %}
+    </ul>
+    {%- endif %}
+    <div class="print-only print-meta">
+      <p>{{ site.author.name }} · Published {{ date | readableDate }}{% if updated %} · Updated {{ updated | readableDate }}{% endif %}</p>
+      <p>{{ canonicalUrl }}</p>
+    </div>
+  </header>
+
+  {%- if image %}
+  <figure class="post__hero">{% postImage image, imageAlt %}</figure>
+  {%- endif %}
+
+  <div class="prose">
+    {{ content | safe }}
+  </div>
+
+  {%- if syndication and syndication.length %}
+  <aside class="post__syndication" aria-label="Also published on">
+    <h2 class="post__aside-title">Also published on</h2>
+    <ul>
+      {%- for s in syndication %}
+      <li><a href="{{ s.url }}" rel="syndication noopener">{{ s.name }}</a></li>
+      {%- endfor %}
+    </ul>
+  </aside>
+  {%- endif %}
+
+  <aside class="cite" aria-labelledby="cite-title">
+    <h2 class="post__aside-title" id="cite-title">Cite this article</h2>
+    <p class="cite__label">APA</p>
+    <p class="cite__text" data-cite="apa">{{ apa }}</p>
+    <p class="cite__label">BibTeX</p>
+    <pre class="cite__code" data-cite="bibtex"><code>{{ bibtexEntry }}</code></pre>
+    <p class="cite__label">Permalink</p>
+    <p class="cite__text"><a href="{{ canonicalUrl }}">{{ canonicalUrl }}</a></p>
+    <p class="cite__label">Source</p>
+    <p class="cite__text"><a href="/writing/{{ page.fileSlug }}.md">Markdown source</a></p>
+  </aside>
+
+  <aside class="author" aria-labelledby="author-title">
+    <h2 class="post__aside-title" id="author-title">About the author</h2>
+    <p>{{ site.author.bio }} <a href="{{ site.author.aboutUrl }}">More about {{ site.author.name }}</a>.</p>
+    <ul class="author__links" role="list">
+      {%- for url in site.author.sameAs %}
+      <li><a href="{{ url }}" rel="me noopener" target="_blank">{{ url | replace("https://", "") | replace("www.", "") | replace(r/\/$/, "") }}</a></li>
+      {%- endfor %}
+    </ul>
+  </aside>
+
+  <div class="post__footer">
+    <a class="post__back" href="/writing"><i class="fas fa-arrow-left" aria-hidden="true"></i> BACK TO WRITING</a>
+  </div>
+</article>

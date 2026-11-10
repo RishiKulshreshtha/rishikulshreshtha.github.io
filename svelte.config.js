@@ -11,5 +11,12 @@ export default {
       precompress: false,
       strict: true,
     }),
+    prerender: {
+      // 11ty owns /writing/** and /rss.xml; fail on any other broken link
+      handleHttpError: ({ path, message }) => {
+        if (path.startsWith('/writing') || path === '/rss.xml') return;
+        throw new Error(message);
+      },
+    },
   },
 };

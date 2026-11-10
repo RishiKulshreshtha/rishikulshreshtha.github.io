@@ -8,6 +8,7 @@
   const links = [
     { href: '/about', label: 'ABOUT' },
     { href: '/projects', label: 'PROJECTS' },
+    { href: '/writing', label: 'WRITING', reload: true },
   ];
 
   function toggleTheme() {
@@ -30,6 +31,7 @@
             class="nav__link"
             class:nav__link--active={$page.url.pathname === link.href}
             href={link.href}
+            data-sveltekit-reload={link.reload ? '' : undefined}
             onclick={() => (menuOpen = false)}
             aria-current={$page.url.pathname === link.href ? 'page' : undefined}
           >
