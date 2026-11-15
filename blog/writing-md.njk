@@ -2,7 +2,7 @@
 permalink: /writing.md
 eleventyExcludeFromCollections: true
 ---
-# Writing — Rishi Kulshreshtha
+# Writing – Rishi Kulshreshtha
 
 {{ site.description | safe }}
 
@@ -13,15 +13,15 @@ JSON feed: {{ site.url }}/writing/feed.json
 
 ## Posts
 {% for post in collections.posts | reverse %}
-- [{{ post.data.title }}]({{ site.url }}/writing/{{ post.fileSlug }}) — {{ post.date | isoDate }} — {{ post.data.description | safe }} (source: {{ site.url }}/writing/{{ post.fileSlug }}.md)
+- [{{ post.data.title }}]({{ site.url }}/writing/{{ post.fileSlug }}) – {{ post.date | isoDate }} – {{ post.data.description | safe }} (source: {{ site.url }}/writing/{{ post.fileSlug }}.md)
 {%- endfor %}
 
 ## Topics
 
-- Drupal development — deep-dives, migrations, custom modules, performance
-- Web accessibility — WCAG, Section 508, ADA in practice
-- AI-readiness — llms.txt, AI-ready content, LLM integration with CMS platforms
-- Open source — contributions, lessons, community
+- Drupal development: deep-dives, migrations, custom modules, performance
+- Web accessibility: WCAG, Section 508, ADA in practice
+- AI-readiness: llms.txt, AI-ready content, LLM integration with CMS platforms
+- Open source: contributions, lessons, community
 
 ## Site
 

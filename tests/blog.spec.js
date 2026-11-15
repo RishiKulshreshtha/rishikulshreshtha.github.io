@@ -1,20 +1,37 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { readFileSync } from 'node:fs';
+import site from '../blog/_data/site.js';
 
-const POST = '/writing/hello-world';
+// Use the newest published post from the built feed; post tests skip when nothing is published
+const feed = JSON.parse(readFileSync(new URL('../docs/writing/feed.json', import.meta.url), 'utf8'));
+const POST = feed.items[0] ? new URL(feed.items[0].url).pathname : null;
+const needsPost = () => test.skip(!POST, 'no published posts');
 
 test.describe('Writing index', () => {
-  test('lists posts and is indexable', async ({ page }) => {
+  test('is indexable and lists posts or the empty state', async ({ page }) => {
     await page.goto('/writing');
     await expect(page.locator('h1')).toHaveText('WRITING');
-    await expect(page.locator('.blog__card').first()).toBeVisible();
+    await expect(page.locator(POST ? '.blog__card' : '.blog__empty').first()).toBeVisible();
     await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://rishikulshreshtha.github.io/writing');
     await expect(page.locator('.comments')).toHaveCount(0);
   });
+
+  test('an unknown slug returns 404', async ({ page }) => {
+    const response = await page.goto('/writing/this-post-does-not-exist');
+    expect(response.status()).toBe(404);
+  });
+
+  test('removed hello-world post returns 404', async ({ page }) => {
+    const response = await page.goto('/writing/hello-world');
+    expect(response.status()).toBe(404);
+  });
 });
 
 test.describe('Post page', () => {
+  test.beforeEach(needsPost);
+
   test('has h1, canonical, BlogPosting JSON-LD and cite box', async ({ page }) => {
     await page.goto(POST);
     await expect(page.locator('h1.post__title')).toBeVisible();
@@ -31,11 +48,11 @@ test.describe('Post page', () => {
     await expect(page.locator('.cite [data-cite="bibtex"]')).toContainText('@online{');
   });
 
-  test('comments box renders when giscus is configured', async ({ page }) => {
-    test.skip(!process.env.GISCUS_REPO_ID, 'GISCUS_REPO_ID not set at build time');
+  test('comments box renders with the configured giscus repo', async ({ page }) => {
+    test.skip(!site.giscus.repoId, 'giscus not configured');
     await page.goto(POST);
     await expect(page.locator('.comments h2')).toHaveText('Comments');
-    await expect(page.locator('[data-giscus]')).toHaveAttribute('data-repo-id', process.env.GISCUS_REPO_ID);
+    await expect(page.locator('[data-giscus]')).toHaveAttribute('data-repo-id', site.giscus.repoId);
   });
 
   test('raw markdown source is served', async ({ request }) => {
@@ -43,16 +60,11 @@ test.describe('Post page', () => {
     expect(res.status()).toBe(200);
     expect(await res.text()).toContain('title:');
   });
-
-  test('an unknown slug returns 404', async ({ page }) => {
-    const response = await page.goto('/writing/this-post-does-not-exist');
-    expect(response.status()).toBe(404);
-  });
 });
 
 test.describe('Theme and navigation', () => {
   test('theme toggle persists rk-theme', async ({ page }) => {
-    await page.goto(POST);
+    await page.goto(POST || '/writing');
     const before = await page.locator('html').getAttribute('data-theme');
     await page.locator('.nav__theme').click();
     const after = await page.locator('html').getAttribute('data-theme');
@@ -85,7 +97,7 @@ test.describe('Theme and navigation', () => {
 });
 
 test.describe('Accessibility', () => {
-  for (const [name, url] of [['index', '/writing'], ['post', POST]]) {
+  for (const [name, url] of [['index', '/writing'], ...(POST ? [['post', POST]] : [])]) {
     for (const scheme of ['dark', 'light']) {
       test(`axe: ${name} (${scheme})`, async ({ page }) => {
         await page.addInitScript((s) => localStorage.setItem('rk-theme', s), scheme);

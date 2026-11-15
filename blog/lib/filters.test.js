@@ -31,7 +31,7 @@ describe('slugifyTag', () => {
 describe('citations', () => {
   const post = { title: 'Hello', date: '2026-03-06', url: 'https://example.com/writing/hello', slug: 'hello' };
   it('builds APA', () => {
-    expect(apaCitation(post)).toBe('Kulshreshtha, R. (2026, March 6). Hello. Rishi Kulshreshtha — Writing. https://example.com/writing/hello');
+    expect(apaCitation(post)).toBe('Kulshreshtha, R. (2026, March 6). Hello. https://example.com/writing/hello');
   });
   it('builds BibTeX', () => {
     const out = bibtex(post);
@@ -39,6 +39,7 @@ describe('citations', () => {
     expect(out).toContain('author = {Kulshreshtha, Rishi},');
     expect(out).toContain('date = {2026-03-06},');
     expect(out).toContain('url = {https://example.com/writing/hello}');
+    expect(out).not.toContain('organization');
   });
 });
 

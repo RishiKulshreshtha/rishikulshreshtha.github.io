@@ -3,7 +3,7 @@ const url = (process.env.SITE_URL || 'https://rishikulshreshtha.github.io').repl
 
 export default {
   url,
-  title: 'Rishi Kulshreshtha — Writing',
+  title: 'Rishi Kulshreshtha – Writing',
   description: 'Notes on Drupal, web accessibility, and AI-readiness from Rishi Kulshreshtha.',
   language: 'en-us',
   // GoatCounter site code (https://<code>.goatcounter.com); analytics are skipped when empty

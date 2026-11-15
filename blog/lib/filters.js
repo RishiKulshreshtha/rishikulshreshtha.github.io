@@ -30,20 +30,19 @@ export function slugifyTag(tag = '') {
   return String(tag).toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
 
-export function apaCitation({ title, date, url, author = 'Kulshreshtha, R.', container = 'Rishi Kulshreshtha — Writing' }) {
+export function apaCitation({ title, date, url, author = 'Kulshreshtha, R.' }) {
   const p = parts(date);
   const when = p ? `(${p.y}, ${MONTHS[p.m]} ${p.d})` : '(n.d.)';
-  return `${author} ${when}. ${title}. ${container}. ${url}`;
+  return `${author} ${when}. ${title}. ${url}`;
 }
 
-export function bibtex({ title, date, url, slug = '', author = 'Kulshreshtha, Rishi', container = 'Rishi Kulshreshtha — Writing' }) {
+export function bibtex({ title, date, url, slug = '', author = 'Kulshreshtha, Rishi' }) {
   const p = parts(date);
   const key = `kulshreshtha${p ? p.y : ''}${slugifyTag(slug).split('-')[0] || 'post'}`;
   const lines = [
     `@online{${key},`,
     `  author = {${author}},`,
     `  title = {${title}},`,
-    `  organization = {${container}},`,
   ];
   if (p) lines.push(`  date = {${isoDate(date)}},`, `  year = {${p.y}},`);
   lines.push(`  url = {${url}}`, '}');
