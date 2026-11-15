@@ -1,0 +1,10 @@
+<aside class="comments" aria-labelledby="comments-title">
+  <h2 class="post__aside-title" id="comments-title">Comments</h2>
+  <p class="comments__intro">Comments are powered by <a href="https://giscus.app" rel="noopener">giscus</a> and stored as <a href="https://github.com/{{ site.giscus.repo }}/discussions" rel="noopener">GitHub Discussions</a>. Sign in with GitHub to join in.</p>
+  <div class="giscus" data-giscus
+    data-repo="{{ site.giscus.repo }}"
+    data-repo-id="{{ site.giscus.repoId }}"
+    data-category="{{ site.giscus.category }}"
+    data-category-id="{{ site.giscus.categoryId }}"></div>
+  <noscript><p class="comments__intro">Enable JavaScript to load comments, or <a href="https://github.com/{{ site.giscus.repo }}/discussions">read them on GitHub</a>.</p></noscript>
+</aside>

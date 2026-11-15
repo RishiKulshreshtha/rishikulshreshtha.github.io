@@ -144,8 +144,8 @@ main { padding-top: var(--nav-height); }
 .token.function, .token.class-name { color: var(--accent-gold); }
 .token.regex, .token.important, .token.variable { color: var(--accent-orange); }
 
-/* ── Post asides: syndication, cite, author ── */
-.post__syndication, .cite, .author { margin-top: 2.5rem; border: 2px solid var(--border-color); background: var(--bg-mid); padding: 1.25rem 1.5rem; font-size: 1rem; }
+/* ── Post asides: syndication, cite, author, comments ── */
+.post__syndication, .cite, .author, .comments { margin-top: 2.5rem; border: 2px solid var(--border-color); background: var(--bg-mid); padding: 1.25rem 1.5rem; font-size: 1rem; }
 .post__aside-title { font-family: var(--font-heading); font-size: 0.875rem; letter-spacing: 0.05em; color: var(--accent-gold); margin-bottom: 0.75rem; }
 .post__syndication ul, .author__links { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
 .post__syndication a, .author a, .cite a { text-decoration: underline; word-break: break-word; }
@@ -153,6 +153,9 @@ main { padding-top: var(--nav-height); }
 .cite__text { color: var(--text-dim); word-break: break-word; }
 .cite__code { background: var(--bg-dark); border: 1px solid var(--border-color); padding: 0.75rem 1rem; overflow-x: auto; font-family: var(--font-mono); font-size: 0.8125rem; line-height: 1.6; color: var(--text-dim); }
 .author p { color: var(--text-dim); line-height: 1.7; margin-bottom: 0.75rem; }
+.comments__intro { color: var(--text-dim); line-height: 1.7; margin-bottom: 1rem; }
+.comments a { text-decoration: underline; }
+.giscus { min-height: 8rem; }
 
 @media (min-width: 768px) {
   .blog__coming-soon { font-size: 1.25rem; }
@@ -167,7 +170,7 @@ main { padding-top: var(--nav-height); }
   html, body { background: #fff !important; color: #000 !important; }
   body { font-size: 11pt; }
   body::after { display: none !important; }
-  .nav, .footer, .skip-link, .post__nav, .post__footer, .post__tags, .tags, .post__syndication .none, .nav__theme { display: none !important; }
+  .nav, .footer, .skip-link, .post__nav, .post__footer, .post__tags, .tags, .post__syndication .none, .nav__theme, .comments { display: none !important; }
   main { padding-top: 0; }
   .print-only { display: block; font-family: var(--font-body); font-size: 10pt; color: #000; margin-top: 0.75rem; }
   .print-only p { margin: 0; word-break: break-all; }

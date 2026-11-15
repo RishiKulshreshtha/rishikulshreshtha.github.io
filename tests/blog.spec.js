@@ -10,6 +10,7 @@ test.describe('Writing index', () => {
     await expect(page.locator('.blog__card').first()).toBeVisible();
     await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://rishikulshreshtha.github.io/writing');
+    await expect(page.locator('.comments')).toHaveCount(0);
   });
 });
 
@@ -28,6 +29,13 @@ test.describe('Post page', () => {
 
     await expect(page.locator('.cite [data-cite="apa"]')).toContainText('Kulshreshtha, R.');
     await expect(page.locator('.cite [data-cite="bibtex"]')).toContainText('@online{');
+  });
+
+  test('comments box renders when giscus is configured', async ({ page }) => {
+    test.skip(!process.env.GISCUS_REPO_ID, 'GISCUS_REPO_ID not set at build time');
+    await page.goto(POST);
+    await expect(page.locator('.comments h2')).toHaveText('Comments');
+    await expect(page.locator('[data-giscus]')).toHaveAttribute('data-repo-id', process.env.GISCUS_REPO_ID);
   });
 
   test('raw markdown source is served', async ({ request }) => {
@@ -82,7 +90,7 @@ test.describe('Accessibility', () => {
       test(`axe: ${name} (${scheme})`, async ({ page }) => {
         await page.addInitScript((s) => localStorage.setItem('rk-theme', s), scheme);
         await page.goto(url);
-        const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
+        const results = await new AxeBuilder({ page }).exclude('.giscus').withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
         expect(results.violations).toEqual([]);
       });
     }

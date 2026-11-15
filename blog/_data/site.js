@@ -9,6 +9,13 @@ export default {
   // GoatCounter site code (https://<code>.goatcounter.com); analytics are skipped when empty
   goatcounter: process.env.GOATCOUNTER_CODE || '',
   gtm: 'GTM-KDQVGPV2',
+  // Giscus comments (GitHub Discussions); IDs come from https://giscus.app and comments are skipped when repoId is empty
+  giscus: {
+    repo: 'RishiKulshreshtha/rishikulshreshtha.github.io',
+    repoId: process.env.GISCUS_REPO_ID || 'MDEwOlJlcG9zaXRvcnk2NDg3MzQ0OA==',
+    category: 'Comments',
+    categoryId: process.env.GISCUS_CATEGORY_ID || 'DIC_kwDOA93j6M4DLKGD',
+  },
   defaultImage: `${url}/img/profile.webp`,
   author: {
     name: 'Rishi Kulshreshtha',

@@ -69,6 +69,10 @@ layout: layouts/base.njk
     </ul>
   </aside>
 
+  {%- if site.giscus.repoId %}
+  {% include "partials/comments.njk" %}
+  {%- endif %}
+
   <div class="post__footer">
     <a class="post__back" href="/writing"><i class="fas fa-arrow-left" aria-hidden="true"></i> BACK TO WRITING</a>
   </div>
